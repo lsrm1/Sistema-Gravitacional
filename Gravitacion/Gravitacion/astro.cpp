@@ -1,6 +1,6 @@
 #include "astro.h"
 
-astro::astro(float x, float y, float _masa, float _radio, float _vx, float _vy,int _color)
+astro::astro(float x, float y, float _masa, float _radio, float _vx, float _vy, int _color)
 {
     posx = x;
     posy = y;
@@ -26,8 +26,10 @@ void astro::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
     widget = nullptr;
 
     if (color == 1) {painter->setBrush(Qt::blue);painter->setPen(Qt::blue);}
-    if (color == 2) {painter->setBrush(Qt::red);painter->setPen(Qt::red);}
-    if (color == 3) {painter->setBrush(Qt::yellow);painter->setPen(Qt::yellow);}
+    if (color == 2) {painter->setBrush(Qt::cyan);painter->setPen(Qt::cyan);}
+    if (color == 3) {painter->setBrush(Qt::red);painter->setPen(Qt::red);}
+    if (color == 4) {painter->setBrush(Qt::yellow);painter->setPen(Qt::yellow);}
+
 
     painter->drawEllipse(boundingRect());
 
@@ -35,14 +37,22 @@ void astro::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 
 void astro::posicion()
 {
-    posx = posx + vx + (0.5 * acx );
-    posy = posy + vy + (0.5 * acy );
+    posx = posx + (vx * TI) + (0.5 * acx * pow(TI,2));
+    posy = posy + (vy * TI) + (0.5 * acy * pow(TI,2));
 
     setPos((posx/E), (-posy/E));
 }
 
 void astro::velocidad()
 {
-    vx = vx + acx;
-    vy = vy + acy;
+    vx = vx + (acx*TI);
+    vy = vy + (acy*TI);
+}
+
+void astro::aceleracion(float astro2, float px2, float py2)
+{
+    float distancia = sqrt(pow((px2-posx),2) + pow((py2-posy),2));
+    angulo = atan2((py2-posy),(px2-posx));
+    acx += (GR * astro2 * cos(angulo)) / pow(distancia,2);
+    acy += (GR * astro2 * sin(angulo)) / pow(distancia,2);
 }
