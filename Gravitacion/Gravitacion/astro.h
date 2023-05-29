@@ -1,14 +1,14 @@
 #ifndef ASTRO_H
 #define ASTRO_H
 
+#define E 25    // Escala para los ejes
+#define ER 10 // Escala para el radio
+#define GR 1  // Gravedad
+#define TI 1  // Variacion del tiempo
+
 #include <QGraphicsItem>
 #include <QPainter>
 #include "math.h"
-
-#define E 25
-#define ER 10
-#define GR 1
-#define TI 1
 
 class astro: public QGraphicsItem
 {
@@ -23,10 +23,11 @@ public:
     float  acx;
     float  acy;
     float  angulo;
+    float distancia;
     int color;
 
 public:
-    astro(float   x,  float  y, float  _masa, float  _radio, float  _vx, float  _vy,int _color);
+    astro(float   x,  float  y, float  _masa, float  _radio, float  _vx, float  _vy, int _color);
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void velocidad();

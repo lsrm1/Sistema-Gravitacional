@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QTimer>
+#include <fstream>
 #include "astro.h"
 
 using namespace std;
@@ -26,14 +27,17 @@ public slots:
 private slots:
     void on_primer_clicked();
     void on_segundo_clicked();
+    void on_terminar_clicked();
 
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *escena;
+
     QList <astro*> astros;
     QTimer *actualizar;
+    ofstream texto;
 
-
+    bool simulando;
 
 };
 #endif // MAINWINDOW_H

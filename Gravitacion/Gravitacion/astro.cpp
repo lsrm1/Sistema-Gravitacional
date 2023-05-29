@@ -25,12 +25,8 @@ void astro::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
     option = nullptr;
     widget = nullptr;
 
-    if (color == 1) {painter->setBrush(Qt::blue);painter->setPen(Qt::blue);}
-    if (color == 2) {painter->setBrush(Qt::cyan);painter->setPen(Qt::cyan);}
-    if (color == 3) {painter->setBrush(Qt::red);painter->setPen(Qt::red);}
-    if (color == 4) {painter->setBrush(Qt::yellow);painter->setPen(Qt::yellow);}
-
-
+    if (color == 1) {painter->setBrush(Qt::darkGreen);painter->setPen(Qt::darkGreen);}
+    if (color == 2) {painter->setBrush(Qt::white);painter->setPen(Qt::white);}
     painter->drawEllipse(boundingRect());
 
 }
@@ -39,7 +35,6 @@ void astro::posicion()
 {
     posx = posx + (vx * TI) + (0.5 * acx * pow(TI,2));
     posy = posy + (vy * TI) + (0.5 * acy * pow(TI,2));
-
     setPos((posx/E), (-posy/E));
 }
 
@@ -51,7 +46,7 @@ void astro::velocidad()
 
 void astro::aceleracion(float astro2, float px2, float py2)
 {
-    float distancia = sqrt(pow((px2-posx),2) + pow((py2-posy),2));
+    distancia = sqrt(pow((px2-posx),2) + pow((py2-posy),2));
     angulo = atan2((py2-posy),(px2-posx));
     acx += (GR * astro2 * cos(angulo)) / pow(distancia,2);
     acy += (GR * astro2 * sin(angulo)) / pow(distancia,2);
