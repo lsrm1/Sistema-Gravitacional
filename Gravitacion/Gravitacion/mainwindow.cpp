@@ -97,7 +97,7 @@ void MainWindow::on_segundo_clicked()
 
 void MainWindow::on_terminar_clicked()
 {
-//    simulando = false;
+    simulando = false;
     actualizar->stop();
     texto.close();
 
